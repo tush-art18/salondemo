@@ -172,54 +172,62 @@
 
           const boxes = macroGridRef.current ? Array.from(macroGridRef.current.children) : [];
 
-          if (boxes.length > 0) {
-            gsap.set(boxes, { transformPerspective: 1200, transformStyle: "preserve-3d" });
-          }
+          // Explicitly ensure every element is completely invisible before sequence begins
+          gsap.set([line1Ref.current, line2Ref.current, boxes, line3Ref.current, scrollIndicatorRef.current], { opacity: 0 });
 
-          // 1. HERO INITIAL SEQUENTIAL ENTRANCE TIMELINE
+          // 1. HERO INITIAL SEQUENTIAL ENTRANCE TIMELINE (Strict step-by-step: Line 1 -> Line 2 -> Images -> Rest of Texts)
           const seqTl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
           seqTl
+            // STEP 1: Line 1 appears first (all other elements are completely invisible)
             .fromTo(line1Ref.current,
-              { opacity: 0, y: 20, filter: "blur(4px)" },
-              { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, delay: 0.05 }
+              { opacity: 0, y: 22, filter: "blur(6px)" },
+              { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, delay: 0.15 }
             )
+            // STEP 2: Only after Line 1 is fully visible -> Line 2 appears (images & rest stay invisible)
             .fromTo(line2Ref.current,
-              { opacity: 0, y: 25, scale: 0.95, filter: "blur(6px)" },
-              { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.5 },
-              "-=0.25"
+              { opacity: 0, y: 25, scale: 0.95, filter: "blur(8px)" },
+              { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.6 },
+              "+=0.2"
             )
-            .fromTo(boxes,
-              { 
-                opacity: 0, 
-                scale: 0.65, 
-                rotationY: (i) => (i - 2) * 18, 
-                rotationX: -15, 
-                z: -120,
-                filter: "blur(8px)"
+            // STEP 3: Only after Line 2 is fully in place -> The 5 Macro Images unfold (line 3 & indicator stay invisible)
+            .fromTo(boxes, 
+              {
+                opacity: 0,
+                scale: 0.65,
+                y: 35,
+                rotationY: (i) => (i - 2) * 16,
+                rotationX: 20,
+                filter: "brightness(1.8) contrast(140%) blur(6px)",
+                transformOrigin: "center center"
               },
-              { 
-                opacity: 1, 
-                scale: 1, 
-                rotationY: 0, 
-                rotationX: 0, 
-                z: 0,
-                filter: "blur(0px)",
-                stagger: 0.08, 
-                duration: 0.75, 
-                ease: "back.out(1.4)" 
+              {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                rotationY: 0,
+                rotationX: 0,
+                filter: "brightness(1) contrast(125%) blur(0px)",
+                duration: 0.6,
+                stagger: {
+                  each: 0.09,
+                  from: "center"
+                },
+                ease: "back.out(1.4)"
               },
-              "-=0.2"
+              "+=0.2"
             )
+            // STEP 4: Only after all 5 images are completely in place -> Line 3 appears
             .fromTo(line3Ref.current,
-              { opacity: 0, y: 20, filter: "blur(5px)" },
-              { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5 },
-              "-=0.2"
+              { opacity: 0, y: 20, filter: "blur(6px)" },
+              { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55 },
+              "+=0.2"
             )
+            // STEP 5: Finally, the scroll indicator softly illuminates
             .fromTo(scrollIndicatorRef.current,
-              { opacity: 0, y: -10 },
-              { opacity: 1, y: 0, duration: 0.4 },
-              "-=0.15"
+              { opacity: 0, y: 12 },
+              { opacity: 1, y: 0, duration: 0.45 },
+              "+=0.15"
             );
 
           // Subtle Organic Harmonic Wave Floating for 5 Macro Cards
