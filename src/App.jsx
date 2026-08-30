@@ -168,11 +168,11 @@ export default function App() {
       // Single Persistent Salon Background - Steady high visibility with gentle cinematic zoom
       heroTimeline.to(singleBgRef.current, { scale: 1.08, ease: "none" }, 0);
       
-      // Phase A: Scene 00 Ascends & Dissolves Smoothly Upward like water (0.0 to 2.4), fully reversible on scroll up
+      // Phase A: Scene 00 Ascends & Dissolves Smoothly Upward like water on scroll (immediateRender: false ensures seqTl is not overridden on load)
       heroTimeline
-        .fromTo(scrollIndicatorRef.current, { opacity: 1, y: 0 }, { opacity: 0, y: -20, duration: 0.6 }, 0)
-        .fromTo(line1Ref.current, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -60, filter: "blur(5px)", duration: 1.2, ease: "power2.in" }, 0.2)
-        .fromTo(line2Ref.current, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }, { opacity: 0, y: -80, scale: 0.94, filter: "blur(6px)", duration: 1.4, ease: "power2.in" }, 0.5)
+        .fromTo(scrollIndicatorRef.current, { opacity: 1, y: 0 }, { opacity: 0, y: -20, duration: 0.6, immediateRender: false }, 0)
+        .fromTo(line1Ref.current, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -60, filter: "blur(5px)", duration: 1.2, ease: "power2.in", immediateRender: false }, 0.2)
+        .fromTo(line2Ref.current, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }, { opacity: 0, y: -80, scale: 0.94, filter: "blur(6px)", duration: 1.4, ease: "power2.in", immediateRender: false }, 0.5)
         .fromTo(boxes, { opacity: 1, y: 0, scale: 1, rotationX: 0, filter: "blur(0px)" }, {
           opacity: 0,
           y: -130,
@@ -181,13 +181,14 @@ export default function App() {
           stagger: 0.08,
           filter: "blur(6px)",
           duration: 1.6,
-          ease: "power2.in"
+          ease: "power2.in",
+          immediateRender: false
         }, 0.7)
-        .fromTo(line3Ref.current, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -60, filter: "blur(5px)", duration: 1.2, ease: "power2.in" }, 1.3)
-        .fromTo(scene00Ref.current, { pointerEvents: "auto", opacity: 1 }, { pointerEvents: "none", opacity: 0, duration: 0.4 }, 2.2);
+        .fromTo(line3Ref.current, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -60, filter: "blur(5px)", duration: 1.2, ease: "power2.in", immediateRender: false }, 1.3)
+        .fromTo(scene00Ref.current, { pointerEvents: "auto", opacity: 1 }, { pointerEvents: "none", opacity: 0, duration: 0.4, immediateRender: false }, 2.2);
 
       // Make sure Scene 01 container is active and visible only when scrolling forward
-      heroTimeline.fromTo(scene01Ref.current, { opacity: 0 }, { opacity: 1, duration: 0.5 }, 2.2);
+      heroTimeline.fromTo(scene01Ref.current, { opacity: 0 }, { opacity: 1, duration: 0.5, immediateRender: false }, 2.2);
 
       // Phase B: Scene 01 Arrives ONE LINE BY ONE LINE on scroll ("Flows like water")
       heroTimeline
