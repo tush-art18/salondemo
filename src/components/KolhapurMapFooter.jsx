@@ -2,81 +2,129 @@ import React from 'react';
 
 export default function KolhapurMapFooter({ onOpenBooking }) {
   return (
-    <footer id="location" className="py-32 px-6 sm:px-10 lg:px-16 bg-[#0b0a08] border-t border-[#1f1e1a]">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+    <footer id="location" className="py-24 sm:py-32 px-4 sm:px-10 lg:px-16 bg-[#070706] border-t border-[#1f1e1a]">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         
-        {/* Salon Details (Col 5) */}
-        <div className="lg:col-span-5 space-y-8">
-          <div>
-            <h3 className="font-display text-2xl font-normal text-[#f4f1ea] tracking-[0.1em]">
-              THE HAIR AVENUE
-            </h3>
-            <p className="text-xs uppercase tracking-[0.2em] text-[#a39e93] font-body mt-1">
-              Unisex Salon • Dabholkar Corner
-            </p>
-          </div>
+        {/* Main Grid: Details & Map */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+          
+          {/* Salon Details (Col 5) */}
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
+            <div className="space-y-6">
+              <div>
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body block mb-2">SALON HEADQUARTERS</span>
+                <h3 className="font-display text-2xl sm:text-3xl font-medium text-[#f5f2eb] tracking-[0.15em]">
+                  THE HAIR AVENUE
+                </h3>
+                <p className="text-xs text-[#9c978e] font-body mt-2 leading-relaxed">
+                  Kolhapur's Premier Unisex Salon & Cosmetology Haven. Architectural precision, luxury aesthetics & bespoke grooming rituals.
+                </p>
+              </div>
 
-          <div className="space-y-2 text-xs text-[#a39e93] font-body font-light">
-            <p>Dabholkar Corner, cross road, apartments, Kolhapur, Maharashtra 416003</p>
-            <p>Direct Line: <a href="tel:09595073807" className="text-[#f4f1ea] underline">095950 73807</a></p>
-          </div>
+              <div className="p-5 bg-[#0e0e0c] border border-[#252420] space-y-3.5">
+                <div className="flex items-start gap-3">
+                  <span className="text-base text-[#cbb074] mt-0.5">📍</span>
+                  <div className="text-xs font-body leading-relaxed text-[#f5f2eb]">
+                    <p className="font-medium text-[#f5f2eb]">Dabholkar Corner, Cross Road Apartments</p>
+                    <p className="text-[#9c978e]">Kolhapur, Maharashtra 416003</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 pt-3 border-t border-[#1a1916]">
+                  <span className="text-sm text-[#cbb074]">📞</span>
+                  <div className="text-xs font-body">
+                    <span className="text-[#9c978e]">Direct Reservations: </span>
+                    <a href="tel:09595073807" className="text-[#f5f2eb] hover:text-[#cbb074] font-medium transition-colors">095950 73807</a>
+                  </div>
+                </div>
+              </div>
 
-          <div className="pt-6 border-t border-[#1f1e1a] text-xs font-body space-y-2">
-            <span className="text-[#6b665e] uppercase tracking-[0.15em] block mb-2">Salon Hours</span>
-            <div className="flex justify-between text-[#a39e93]">
-              <span>Sunday – Saturday</span>
-              <span className="text-[#f4f1ea]">9:30 AM – 9:30 PM</span>
+              <div className="space-y-2 text-xs font-body">
+                <div className="flex justify-between items-center py-2 border-b border-[#1a1916]">
+                  <span className="text-[#9c978e]">Monday – Sunday</span>
+                  <span className="text-[#f5f2eb] font-medium">9:00 AM – 9:30 PM</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-[#1a1916]">
+                  <span className="text-[#9c978e]">VIP Appointments</span>
+                  <span className="text-[#cbb074]">Advance Booking</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-[#1a1916]">
+                  <span className="text-[#9c978e]">Guest Parking</span>
+                  <span className="text-[#cbb074]">Free On-Site Parking</span>
+                </div>
+              </div>
             </div>
-            <div className="flex justify-between text-[#a39e93]">
-              <span>Monday</span>
-              <span className="text-[#f4f1ea]">9:00 AM – 9:30 PM</span>
+
+            <div className="flex flex-wrap gap-3 pt-2">
+              <button
+                onClick={onOpenBooking}
+                className="btn-cinema text-xs px-6 py-3.5 flex-1 justify-center text-center"
+              >
+                RESERVE NOW
+              </button>
+              <a
+                href="https://maps.google.com/?q=The+Hair+Avenue+Dabholkar+Corner+Kolhapur+Maharashtra+416003"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 bg-[#141412] border border-[#252420] text-[#f5f2eb] text-[10px] uppercase tracking-[0.2em] hover:border-[#cbb074] hover:text-[#cbb074] transition-all flex items-center gap-2 justify-center"
+              >
+                <span>DIRECTIONS ↗</span>
+              </a>
             </div>
           </div>
 
-          <button
-            onClick={onOpenBooking}
-            className="btn-primary w-full justify-center"
-          >
-            Book Appointment
-          </button>
-        </div>
+          {/* Interactive Google Map (Col 7) */}
+          <div className="lg:col-span-7 flex flex-col">
+            <div className="relative w-full h-full min-h-[360px] sm:min-h-[420px] bg-[#0e0e0c] border border-[#252420] overflow-hidden group hover:border-[#cbb074]/60 transition-colors shadow-2xl flex flex-col">
+              
+              {/* Map Header */}
+              <div className="px-4 sm:px-6 py-3 bg-[#141412] border-b border-[#252420] flex items-center justify-between z-10">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-[#f5f2eb] font-body font-medium">GOOGLE MAPS · SALON LOCATION</span>
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.15em] text-[#cbb074] font-body font-medium">DABHOLKAR CORNER</span>
+              </div>
 
-        {/* Map Landmark Callout (Col 7) */}
-        <div className="lg:col-span-7 bg-[#12110f] p-10 sm:p-14 flex flex-col justify-between border border-[#1f1e1a]">
-          <div>
-            <span className="text-xs uppercase tracking-[0.2em] text-[#c5a059] font-body block mb-2">
-              Dabholkar Corner Landmark Pin
-            </span>
-            <h4 className="font-display text-2xl sm:text-3xl font-normal text-[#f4f1ea]">
-              Situated at the heart of Kolhapur
-            </h4>
-            <p className="mt-4 text-xs text-[#a39e93] font-body font-light leading-relaxed">
-              5 minutes from Central Railway & Bus Stand • 8 minutes from Rankala Lake. Free guest parking available.
-            </p>
+              {/* Map Iframe */}
+              <div className="relative flex-1 w-full min-h-[280px]">
+                <iframe
+                  title="The Hair Avenue Salon Google Maps Location"
+                  src="https://maps.google.com/maps?q=The%20Hair%20Avenue%20Dabholkar%20Corner%20Kolhapur%20Maharashtra%20416003&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  className="w-full h-full border-0 absolute inset-0 filter grayscale-[20%] contrast-[105%] brightness-[94%] hover:filter-none transition-all duration-700"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+
+              {/* Map Footer Bar */}
+              <div className="px-4 sm:px-6 py-3.5 bg-[#141412] border-t border-[#252420] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 z-10">
+                <div className="text-[10px] font-body text-[#9c978e] flex items-center gap-2">
+                  <span>🚆 5 mins from Kolhapur Railway Station</span>
+                  <span className="hidden sm:inline text-[#5c5850]">•</span>
+                  <span className="hidden sm:inline">Rankala Lake: 8 mins</span>
+                </div>
+                <a
+                  href="https://maps.google.com/?q=The+Hair+Avenue+Dabholkar+Corner+Kolhapur+Maharashtra+416003"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] uppercase tracking-[0.15em] text-[#cbb074] hover:text-[#f5f2eb] font-body font-semibold flex items-center gap-1 transition-colors"
+                >
+                  Open in Google Maps App ↗
+                </a>
+              </div>
+
+            </div>
           </div>
 
-          <div className="pt-10">
-            <a
-              href="https://maps.google.com/?q=Dabholkar+Corner+cross+road+apartments+Kolhapur+Maharashtra+416003"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline inline-flex"
-            >
-              Get Google Maps Directions →
-            </a>
-          </div>
         </div>
 
-      </div>
+        {/* Copyright Bar */}
+        <div className="pt-8 border-t border-[#1f1e1a] flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-[#5c5850] font-body">
+          <span>© {new Date().getFullYear()} THE HAIR AVENUE UNISEX SALON. ALL RIGHTS RESERVED.</span>
+          <span>DABHOLKAR CORNER · KOLHAPUR · MAHARASHTRA 416003</span>
+        </div>
 
-      {/* Copyright Bar */}
-      <div className="max-w-7xl mx-auto pt-16 mt-16 border-t border-[#1f1e1a] flex flex-col sm:flex-row items-center justify-between text-xs text-[#6b665e] font-body tracking-[0.15em] uppercase">
-        <div>
-          © {new Date().getFullYear()} The Hair Avenue Unisex Salon. All Rights Reserved.
-        </div>
-        <div>
-          Dabholkar Corner • Kolhapur 416003
-        </div>
       </div>
     </footer>
   );

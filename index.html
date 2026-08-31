@@ -111,6 +111,9 @@
 
       const scene02Ref = useRef(null);
       const consultPortraitRef = useRef(null);
+      const unisexSceneRef = useRef(null);
+      const unisexMaleRef = useRef(null);
+      const unisexFemaleRef = useRef(null);
       const craftTitleRef = useRef(null);
       const craftGridRef = useRef(null);
       const transformSecRef = useRef(null);
@@ -141,6 +144,10 @@
         macro4: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=600&q=80",
         macro5: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=600&q=80",
         consultationPortrait: "stylist.jpeg",
+        craftsmanshipTeam: "Craftsmanship.jpeg",
+        // Dedicated Unisex Male & Female Portraits
+        unisexMale: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1200&q=85",
+        unisexFemale: "https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1200&q=85",
         // Before/After - matching male haircut transformation portraits
         beforePerson: "/before.jpeg",
         afterPerson: "after.jpeg",
@@ -342,9 +349,44 @@
             }
           );
 
+          // SCENE 03: UNISEX ATELIER DUALITY PHOTOGRAPHY GSAP
+          if (unisexSceneRef.current) {
+            if (unisexMaleRef.current) {
+              gsap.fromTo(unisexMaleRef.current,
+                { opacity: 0.25, y: 50, scale: 0.96 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  duration: 1,
+                  ease: "power3.out",
+                  scrollTrigger: {
+                    trigger: unisexSceneRef.current,
+                    start: "top 75%"
+                  }
+                }
+              );
+            }
+            if (unisexFemaleRef.current) {
+              gsap.fromTo(unisexFemaleRef.current,
+                { opacity: 0.25, y: 50, scale: 0.96 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  duration: 1,
+                  delay: 0.15,
+                  ease: "power3.out",
+                  scrollTrigger: {
+                    trigger: unisexSceneRef.current,
+                    start: "top 75%"
+                  }
+                }
+              );
+            }
+          }
 
-
-          // SCENE 03: THE CRAFT — EXPANDING KINETIC TYPOGRAPHY, BANNER, TABS & 3D CARDS
+          // SCENE 04: THE MENU — EXPANDING KINETIC TYPOGRAPHY, TABS & CARDS
           gsap.fromTo(craftTitleRef.current, 
             { letterSpacing: "-0.04em", opacity: 0.2, y: 30 }, 
             {
@@ -415,7 +457,7 @@
 
 
 
-          // SCENE 07: BEFORE/AFTER TRANSFORMATION — APERTURE ZOOM & QUOTE SLIDE-IN
+          // SCENE 05: BEFORE/AFTER TRANSFORMATION — APERTURE ZOOM & QUOTE SLIDE-IN
           if (transformSecRef.current) {
             gsap.fromTo(".transform-header", 
               { opacity: 0, y: 35 }, 
@@ -470,7 +512,7 @@
 
 
 
-          // SCENE 08: STYLISTS — 3D STAGGERED ROTATION & PARALLAX
+          // SCENE 06: THE ARTISANS — 3D STAGGERED ROTATION & PARALLAX
           gsap.fromTo(".stylists-header", 
             { opacity: 0, y: 35 }, 
             {
@@ -506,7 +548,7 @@
 
 
 
-          // SCENE 09: OPERATIONAL TIMELINE — STAGGERED CASCADE
+          // SCENE 07: THE SPACE — PHOTO STRIP CASCADE
           gsap.fromTo(".timeline-header", 
             { opacity: 0, y: 35 }, 
             {
@@ -541,7 +583,7 @@
 
 
 
-          // SCENE 11: DEVANAGARI IDENTITY MORPH
+          // SCENE 08: IDENTITY DEVANAGARI MORPH
           ScrollTrigger.create({
             trigger: "#scene-devanagari",
             start: "top 75%",
@@ -569,7 +611,7 @@
 
 
 
-          // SCENE 12: CONCLUSION & VIP PASS
+          // SCENE 09: THE CONCLUSION & PASS
           gsap.fromTo(conclusionTitleRef.current, 
             { scale: 0.92, opacity: 0.3, y: 30 }, 
             {
@@ -651,11 +693,19 @@
       };
 
       const services = [
-        { id: 's1', type: 'Hair', name: 'The Akhada Sculpt', tag: 'CUT · SHAPE · CHARACTER', price: '₹450', duration: '45 mins', desc: 'Architectural precision cut using imported Japanese steel shears. Scalp detox wash and eucalyptus hot towel finish.' },
-        { id: 's2', type: 'Hair', name: 'Gold Balayage & Colour Restoration', tag: 'COLOUR · ILLUMINATION', price: '₹4,500', duration: '120 mins', desc: 'High-shine keratin protein color locks thermal restoration with diamond reflection.' },
-        { id: 's3', type: 'Skin', name: 'Hydra-Glow Facial Purification', tag: 'RESET · PURIFY · RADIATE', price: '₹2,800', duration: '60 mins', desc: 'Clinical 6-in-1 medical cosmetological treatment. Vortex pore extraction and hyaluronic jet infusion.' },
-        { id: 's4', type: 'Grooming', name: 'Precision Beard Architecture', tag: 'DEFINE · CONTOUR · SPA', price: '₹350', duration: '35 mins', desc: 'Straight razor edge detailing, beard length trimming, and cedarwood warm oil massage.' },
-        { id: 's5', type: 'Beauty', name: 'Bridal Glam & HD Makeup', tag: 'REFINE · ADORN · REIGN', price: '₹12,500', duration: '180 mins', desc: 'Opulent HD waterproof airbrush makeup, traditional Gajra hair updo, and saree drapery.' }
+        // Hair
+        { id: 'h1', type: 'Hair', name: 'Signature Cut & Style', desc: 'Precision cut, wash, and finish.', duration: '45 min', price: '₹450' },
+        { id: 'h2', type: 'Hair', name: 'Global Colour & Gloss', desc: 'Full colour with a high-shine finish.', duration: '90 min', price: '₹3,200' },
+        { id: 'h3', type: 'Hair', name: 'The Akhada Sculpt', desc: 'Architectural precision haircut using imported Japanese steel shears.', duration: '45 min', price: '₹450' },
+        { id: 'h4', type: 'Hair', name: 'Gold Balayage & Colour Restoration', desc: 'High-shine keratin colour lock with diamond infusion.', duration: '120 min', price: '₹4,500' },
+
+        // Skin & Beard
+        { id: 'sb1', type: 'Skin & Beard', name: 'Precision Beard Sculpt', desc: 'Clean lines, hot towel finish.', duration: '35 min', price: '₹350' },
+        { id: 'sb2', type: 'Skin & Beard', name: 'Hydra Facial', desc: 'Deep-cleanse and hydration facial.', duration: '60 min', price: '₹2,800' },
+
+        // Bridal
+        { id: 'b1', type: 'Bridal', name: 'Bridal Hair & Makeup', desc: 'Full bridal styling, HD makeup included.', duration: '180 min', price: '₹12,500' },
+        { id: 'b2', type: 'Bridal', name: 'Trial Sitting', desc: 'Preview session before the big day.', duration: '90 min', price: '₹3,000' }
       ];
 
       const stylists = [
@@ -665,11 +715,12 @@
         { name: "SIDDHARTH", role: "Senior Beard Artisan", quote: "The razor edge requires the steady hand of a master craftsman.", image: images.stylist4 }
       ];
 
-      const timeline = [
-        { time: "08:59 AM", title: "Lights Turn On", desc: "Before the city wakes up, we begin." },
-        { time: "09:07 AM", title: "First Chair Prepared", desc: "Every tool sterilized. Every detail has a purpose." },
-        { time: "01:15 PM", title: "Midday Artisan Rhythm", desc: "Japanese shears, botanical oils, silent focus." },
-        { time: "06:30 PM", title: "Dabholkar Evening Glow", desc: "Transformations continuing under warm amber light." }
+      const spacePhotos = [
+        { id: 'sp1', src: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80", alt: "Morning light in salon" },
+        { id: 'sp2', src: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80", alt: "Artisan tools laid out" },
+        { id: 'sp3', src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80", alt: "Empty artisan chair" },
+        { id: 'sp4', src: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80", alt: "Mirror reflection and ambient glow" },
+        { id: 'sp5', src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80", alt: "Sterilized grooming station" }
       ];
 
       const getWhatsAppLink = () => {
@@ -690,7 +741,7 @@
                 THE HAIR AVENUE
               </span>
               <span className="text-[8px] sm:text-[9px] tracking-[0.2em] sm:tracking-[0.25em] text-[#9c978e] uppercase font-body mt-0.5">
-                Dabholkar Corner · Kolhapur
+                Unisex Salon · Kolhapur
               </span>
             </a>
 
@@ -857,59 +908,171 @@
             </section>
 
 
-            {/* SCENE 03 - 06: THE CRAFT (RESPONSIVE FLUID TYPOGRAPHY & CARDS) */}
-            <section className="relative z-10 py-20 sm:py-32 px-4 sm:px-12 lg:px-20 bg-[#0e0e0c] border-t border-[#1f1e1a]">
-              <div className="max-w-7xl mx-auto">
+            {/* SCENE 03: UNISEX ATELIER */}
+            <section ref={unisexSceneRef} className="relative z-10 py-16 sm:py-28 px-4 sm:px-10 lg:px-16 bg-[#090807] border-t border-[#1f1e1a]">
+              <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
                 
-                {/* Big Typography Header */}
-                <div className="mb-12 sm:mb-20">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body block mb-2 sm:mb-3">Scene 03 · The Craft</span>
-                  <h2 ref={craftTitleRef} className="font-display text-4xl xs:text-6xl sm:text-7xl lg:text-9xl font-normal text-[#f5f2eb] break-words">
-                    THE CRAFT
-                  </h2>
-                </div>
-
-                {/* Kinetic Hair Morphing Banner */}
-                <div ref={strandMorphRef} className="py-8 sm:py-12 border-y border-[#1f1e1a] mb-12 sm:mb-16 flex flex-col sm:flex-row items-start sm:items-baseline justify-between gap-4 sm:gap-6 will-change-transform">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#cbb074] font-body">HAIR STRAND MORPH</span>
-                  <div className="font-display text-2xl sm:text-5xl text-[#f5f2eb] tracking-widest space-x-3 sm:space-x-6">
-                    <span>CUT.</span>
-                    <span className="text-[#9c978e]">SHAPE.</span>
-                    <span className="text-[#cbb074] italic">CHARACTER.</span>
+                {/* Minimal Header */}
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#1f1e1a] pb-6">
+                  <div>
+                    <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#cbb074] font-body block mb-1">
+                      Scene 03 · Unisex Atelier
+                    </span>
+                    <h2 className="font-display text-2xl sm:text-4xl text-[#f5f2eb] font-normal tracking-wide">
+                      Crafted for Him. Sculpted for Her.
+                    </h2>
+                  </div>
+                  <div className="text-[10px] uppercase tracking-[0.25em] text-[#5c5850] font-body">
+                    THE HAIR AVENUE · UNISEX EXCELLENCE
                   </div>
                 </div>
 
-                {/* Service Category Filter Tabs */}
-                <div ref={servicesTabsRef} className="flex gap-4 sm:gap-8 overflow-x-auto no-scrollbar pb-4 sm:pb-6 mb-12 sm:mb-16 border-b border-[#1f1e1a]">
-                  {['Hair', 'Skin', 'Grooming', 'Beauty'].map((cat) => (
+                {/* Dual Large Photography Showcase (Male & Female) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
+                  
+                  {/* Male Portrait Panel */}
+                  <div 
+                    ref={unisexMaleRef}
+                    className="group relative h-[480px] sm:h-[620px] lg:h-[700px] overflow-hidden border border-[#252420] hover:border-[#cbb074]/60 transition-all duration-700 bg-[#12110f] shadow-2xl cursor-pointer"
+                  >
+                    <img 
+                      src={images.unisexMale} 
+                      alt="Gentlemen Styling - The Hair Avenue" 
+                      className="w-full h-full object-cover object-center filter grayscale contrast-[112%] brightness-[92%] group-hover:grayscale-0 group-hover:contrast-[108%] group-hover:saturate-[120%] group-hover:scale-105 transition-all duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-[#070706]/20 to-transparent group-hover:opacity-60 transition-opacity duration-700"></div>
+                    <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-500"></div>
+
+                    {/* Corner Minimal Badge */}
+                    <div className="absolute top-5 left-5 px-3 py-1.5 bg-[#070706]/85 backdrop-blur-md border border-[#252420] text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#f5f2eb] font-body">
+                      01 · FOR HIM
+                    </div>
+
+                    {/* Bottom Editorial Label */}
+                    <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+                      <div className="space-y-1">
+                        <span className="text-[9px] uppercase tracking-[0.25em] text-[#cbb074] font-body block">
+                          PRECISION & ARCHITECTURE
+                        </span>
+                        <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">
+                          Gentlemen's Couture
+                        </h3>
+                      </div>
+                      <span className="text-xs text-[#9c978e] font-display italic hidden sm:inline">
+                        Avenue Men
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Female Portrait Panel */}
+                  <div 
+                    ref={unisexFemaleRef}
+                    className="group relative h-[480px] sm:h-[620px] lg:h-[700px] overflow-hidden border border-[#252420] hover:border-[#cbb074]/60 transition-all duration-700 bg-[#12110f] shadow-2xl cursor-pointer"
+                  >
+                    <img 
+                      src={images.unisexFemale} 
+                      alt="Women Couture - The Hair Avenue" 
+                      className="w-full h-full object-cover object-center filter grayscale contrast-[112%] brightness-[92%] group-hover:grayscale-0 group-hover:contrast-[108%] group-hover:saturate-[120%] group-hover:scale-105 transition-all duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-[#070706]/20 to-transparent group-hover:opacity-60 transition-opacity duration-700"></div>
+                    <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-500"></div>
+
+                    {/* Corner Minimal Badge */}
+                    <div className="absolute top-5 left-5 px-3 py-1.5 bg-[#070706]/85 backdrop-blur-md border border-[#252420] text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#f5f2eb] font-body">
+                      02 · FOR HER
+                    </div>
+
+                    {/* Bottom Editorial Label */}
+                    <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+                      <div className="space-y-1">
+                        <span className="text-[9px] uppercase tracking-[0.25em] text-[#cbb074] font-body block">
+                          HAUTE & RADIANCE
+                        </span>
+                        <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">
+                          Women's Haute Coiffure
+                        </h3>
+                      </div>
+                      <span className="text-xs text-[#9c978e] font-display italic hidden sm:inline">
+                        Avenue Women
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+
+            {/* SCENE 04: THE MENU */}
+            <section id="services" className="relative z-10 py-20 sm:py-32 px-4 sm:px-12 lg:px-20 bg-[#0e0e0c] border-t border-[#1f1e1a]">
+              <div className="max-w-7xl mx-auto">
+                
+                {/* Section Title & Subhead */}
+                <div className="mb-10 sm:mb-14">
+                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#cbb074] font-body block mb-2 sm:mb-3">
+                    Scene 04 · The Menu
+                  </span>
+                  <h2 ref={craftTitleRef} className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal text-[#f5f2eb] tracking-tight">
+                    The Menu
+                  </h2>
+                  <p className="mt-2 sm:mt-3 text-base sm:text-xl text-[#9c978e] font-display italic">
+                    Not services. Sittings.
+                  </p>
+                </div>
+
+                {/* Category Filter Tabs */}
+                <div ref={servicesTabsRef} className="flex gap-6 sm:gap-10 overflow-x-auto no-scrollbar pb-4 sm:pb-5 mb-10 sm:mb-14 border-b border-[#1f1e1a]">
+                  {['Hair', 'Skin & Beard', 'Bridal'].map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] font-body whitespace-nowrap py-2 transition-colors relative ${
-                        selectedCategory === cat ? 'text-[#f5f2eb] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[#cbb074]' : 'text-[#5c5850] hover:text-[#9c978e]'
+                      className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-body whitespace-nowrap py-2 transition-all relative ${
+                        selectedCategory === cat
+                          ? 'text-[#f5f2eb] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbb074]'
+                          : 'text-[#5c5850] hover:text-[#9c978e]'
                       }`}
                     >
-                      {cat === 'Hair' && 'HAIR · CUT & COLOUR'}
-                      {cat === 'Skin' && 'SKIN · RESET'}
-                      {cat === 'Grooming' && 'GROOMING · DEFINE'}
-                      {cat === 'Beauty' && 'BEAUTY · REFINE'}
+                      {cat}
                     </button>
                   ))}
                 </div>
 
-                {/* Service List Unboxed */}
-                <div ref={craftGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
-                  {services.filter(s => selectedCategory === 'All' || s.type === selectedCategory).map((service) => (
-                    <div key={service.id} className="pt-6 border-t border-[#1f1e1a] flex flex-col justify-between space-y-6 group hover:border-[#cbb074]/60 transition-colors duration-500 will-change-transform">
-                      <div>
-                        <span className="text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#cbb074] font-body block mb-2">{service.tag}</span>
-                        <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">{service.name}</h3>
-                        <p className="mt-2 sm:mt-3 text-xs text-[#9c978e] font-body leading-relaxed">{service.desc}</p>
+                {/* Plain, Highly Scannable Menu List */}
+                <div ref={craftGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  {services.filter(s => s.type === selectedCategory).map((service) => (
+                    <div
+                      key={service.id}
+                      className="p-6 sm:p-7 bg-[#12110f] border border-[#1f1e1a] hover:border-[#cbb074]/60 transition-all duration-300 flex flex-col justify-between space-y-5 group shadow-lg"
+                    >
+                      <div className="space-y-2">
+                        <div className="flex items-baseline justify-between gap-4">
+                          <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">
+                            {service.name}
+                          </h3>
+                          <span className="font-display text-lg sm:text-xl text-[#cbb074] font-medium whitespace-nowrap">
+                            {service.price}
+                          </span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-[#9c978e] font-body leading-relaxed">
+                          {service.desc}
+                        </p>
                       </div>
 
-                      <div className="pt-4 border-t border-[#1f1e1a] flex items-center justify-between text-xs font-body tracking-[0.15em] text-[#5c5850]">
-                        <span>{service.duration}</span>
-                        <span className="font-display text-base sm:text-lg text-[#f5f2eb] font-normal">{service.price}</span>
+                      <div className="pt-4 border-t border-[#1a1916] flex items-center justify-between text-xs font-body">
+                        <span className="text-[#5c5850] tracking-[0.15em] uppercase flex items-center gap-1.5">
+                          <span>⏱</span> {service.duration}
+                        </span>
+                        <button
+                          onClick={() => {
+                            setBookingData({ ...bookingData, service: service.name });
+                            setBookingConfirmed(false);
+                            setBookingOpen(true);
+                          }}
+                          className="text-[10px] uppercase tracking-[0.2em] text-[#f5f2eb] group-hover:text-[#cbb074] transition-colors font-medium flex items-center gap-1 cursor-pointer"
+                        >
+                          Reserve Sitting →
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -919,12 +1082,12 @@
             </section>
 
 
-            {/* SCENE 07: BEFORE/AFTER TRANSFORMATION (MOBILE TOUCH SLIDER) */}
+            {/* SCENE 05: BEFORE/AFTER TRANSFORMATION */}
             <section ref={transformSecRef} className="relative z-10 py-20 sm:py-32 px-4 sm:px-12 lg:px-20 bg-[#070706] border-t border-[#1f1e1a]">
               <div className="max-w-7xl mx-auto">
                 
                 <div className="transform-header max-w-3xl mb-10 sm:mb-16">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body block mb-2 sm:mb-3">Scene 07 · The Reveal</span>
+                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body block mb-2 sm:mb-3">Scene 05 · The Reveal</span>
                   <h2 className="font-display text-3xl sm:text-6xl font-normal text-[#f5f2eb] leading-tight">
                     BEFORE / AFTER
                   </h2>
@@ -1009,76 +1172,130 @@
             </section>
 
 
-            {/* SCENE 08: STYLISTS (RESPONSIVE GRID) */}
+            {/* SCENE 06: THE ARTISANS — COMBINED STAFF EDITORIAL (INFO LEFT, IMAGE RIGHT) */}
             <section className="relative z-10 py-20 sm:py-32 px-4 sm:px-12 lg:px-20 bg-[#0e0e0c] border-t border-[#1f1e1a]">
               <div className="max-w-7xl mx-auto">
-                
-                <div className="stylists-header max-w-3xl mb-12 sm:mb-20">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body block mb-2 sm:mb-3">Scene 08 · Craftsmanship</span>
-                  <h2 className="font-display text-2xl sm:text-5xl font-normal text-[#f5f2eb] leading-tight">
-                    THE HANDS BEHIND THE TRANSFORMATION
-                  </h2>
-                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 items-center">
+                  
+                  {/* LEFT COLUMN: INFO & STORYTELLING */}
+                  <div className="lg:col-span-6 space-y-6 sm:space-y-8">
+                    <div>
+                      <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#cbb074] font-body block mb-2 sm:mb-3">
+                        Scene 06 · The Artisans
+                      </span>
+                      <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-[#f5f2eb] leading-tight">
+                        THE HANDS BEHIND THE CRAFT
+                      </h2>
+                      <p className="mt-4 text-sm sm:text-base text-[#9c978e] font-body leading-relaxed">
+                        Our atelier brings together Kolhapur's premier hair architects, certified master colourists, and bespoke beard sculptors — trained in Japanese precision cutting and clinical scalp diagnostics.
+                      </p>
+                    </div>
 
-                <div ref={stylistsGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
-                  {stylists.map((st, idx) => (
-                    <div key={idx} className="group cursor-pointer space-y-4 sm:space-y-6 will-change-transform" onClick={() => { setBookingConfirmed(false); setBookingOpen(true); }}>
-                      <div className="aspect-[3/4] bg-[#141412] image-zoom-container border border-[#252420] shadow-xl group-hover:border-[#cbb074]/50 transition-colors duration-500">
-                        <img
-                          src={st.image}
-                          alt={st.name}
-                          className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                        />
+                    {/* Pillars / Specializations */}
+                    <div className="space-y-4 pt-2 border-t border-[#1f1e1a]">
+                      <div className="flex items-start gap-4">
+                        <span className="text-[#cbb074] text-sm mt-0.5">✦</span>
+                        <div>
+                          <h4 className="font-display text-lg text-[#f5f2eb]">Architectural Hair Sculptors</h4>
+                          <p className="text-xs text-[#9c978e] font-body">Imported Japanese steel shear work tailored to facial geometry.</p>
+                        </div>
                       </div>
-
-                      <div>
-                        <span className="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#cbb074] font-body block mb-1">{st.role}</span>
-                        <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">{st.name}</h3>
-                        <p className="text-xs italic text-[#9c978e] font-display mt-2 sm:mt-3 leading-relaxed">
-                          "{st.quote}"
-                        </p>
+                      <div className="flex items-start gap-4">
+                        <span className="text-[#cbb074] text-sm mt-0.5">✦</span>
+                        <div>
+                          <h4 className="font-display text-lg text-[#f5f2eb]">Master Colourists & Balayage Artists</h4>
+                          <p className="text-xs text-[#9c978e] font-body">Diamond gloss infusion and bespoke botanical tone balance.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-4">
+                        <span className="text-[#cbb074] text-sm mt-0.5">✦</span>
+                        <div>
+                          <h4 className="font-display text-lg text-[#f5f2eb]">Skin & Cosmetology Therapists</h4>
+                          <p className="text-xs text-[#9c978e] font-body">Hydra-pore purification and hot eucalyptus towel finishes.</p>
+                        </div>
                       </div>
                     </div>
-                  ))}
-                </div>
 
+                    <div className="pt-2">
+                      <button
+                        onClick={() => { setBookingConfirmed(false); setBookingOpen(true); }}
+                        className="btn-cinema text-xs uppercase tracking-[0.2em] px-8 py-3.5"
+                      >
+                        Reserve with Atelier Team →
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* RIGHT COLUMN: COMBINED STAFF IMAGE */}
+                  <div className="lg:col-span-6">
+                    <div className="group relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-[#141412] border border-[#252420] hover:border-[#cbb074]/60 transition-all duration-700 shadow-2xl cursor-pointer" onClick={() => { setBookingConfirmed(false); setBookingOpen(true); }}>
+                      <img
+                        src={images.craftsmanshipTeam}
+                        alt="The Hair Avenue Artisans Team"
+                        className="w-full h-full object-cover filter grayscale contrast-[110%] brightness-[94%] group-hover:grayscale-0 group-hover:contrast-[108%] group-hover:scale-105 transition-all duration-1000 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-transparent to-transparent group-hover:opacity-40 transition-opacity duration-700"></div>
+
+                      {/* Corner Badge */}
+                      <div className="absolute top-4 left-4 px-3 py-1.5 bg-[#070706]/85 backdrop-blur-md border border-[#252420] text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body">
+                        THE ATELIER TEAM
+                      </div>
+
+                      {/* Bottom Caption */}
+                      <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-xs font-body">
+                        <span className="text-[#f5f2eb] font-display text-base">The Hair Avenue Craftsmen</span>
+                        <span className="text-[#cbb074] tracking-[0.15em] uppercase text-[10px]">Kolhapur</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </section>
 
 
-            {/* SCENE 09 - 10: THE SALON AS A CHARACTER (RESPONSIVE GRID) */}
+            {/* SCENE 07: THE SPACE */}
             <section className="relative z-10 py-20 sm:py-32 px-4 sm:px-12 lg:px-20 bg-[#070706] border-t border-[#1f1e1a]">
               <div className="max-w-7xl mx-auto">
                 
-                <div className="timeline-header max-w-3xl mb-12 sm:mb-20">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body block mb-2 sm:mb-3">Scene 09 · The Space</span>
-                  <h2 className="font-display text-2xl sm:text-5xl font-normal text-[#f5f2eb] leading-tight">
-                    THE SALON AS A CHARACTER
-                  </h2>
-                  <p className="mt-3 sm:mt-4 text-[10px] sm:text-xs text-[#9c978e] font-body uppercase tracking-[0.15em] sm:tracking-[0.2em]">
-                    Behind the doors of Dabholkar Corner. Every detail has a purpose.
-                  </p>
+                {/* Small top-left Section Title */}
+                <div className="timeline-header mb-8 sm:mb-12">
+                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#cbb074] font-body block">
+                    Scene 07 · The Space
+                  </span>
                 </div>
 
-                <div ref={timelineGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                  {timeline.map((item, idx) => (
-                    <div key={idx} className="pt-6 border-t border-[#1f1e1a] space-y-2 sm:space-y-3 group hover:border-[#cbb074]/60 transition-colors duration-500 will-change-transform">
-                      <span className="font-display text-xl sm:text-2xl text-[#cbb074] font-normal block">{item.time}</span>
-                      <h4 className="font-display text-lg sm:text-xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">{item.title}</h4>
-                      <p className="text-xs text-[#9c978e] font-body leading-relaxed">{item.desc}</p>
+                {/* Wordless Photo Strip */}
+                <div ref={timelineGridRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+                  {spacePhotos.map((photo) => (
+                    <div
+                      key={photo.id}
+                      className="group relative aspect-[3/4] overflow-hidden bg-[#12110f] border border-[#1f1e1a] hover:border-[#cbb074]/60 transition-all duration-700 shadow-xl"
+                    >
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        className="w-full h-full object-cover filter grayscale-[20%] contrast-[105%] group-hover:scale-108 group-hover:filter-none transition-all duration-1000 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#070706]/40 via-transparent to-transparent"></div>
                     </div>
                   ))}
                 </div>
+
+                {/* Single centered small caption */}
+                <p className="text-center text-xs sm:text-sm text-[#9c978e] font-display italic tracking-wide mt-10 sm:mt-14">
+                  Every detail here is on purpose.
+                </p>
 
               </div>
             </section>
 
 
-            {/* SCENE 11: DEVANAGARI MORPH SECTION */}
+            {/* SCENE 08: IDENTITY DEVANAGARI MORPH */}
             <section id="scene-devanagari" className="relative z-10 py-20 sm:py-32 px-4 sm:px-12 lg:px-20 bg-[#0e0e0c] border-t border-[#1f1e1a] text-center">
               <div ref={devanagariCardRef} className="max-w-4xl mx-auto space-y-8 sm:space-y-10 will-change-transform">
                 
-                <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body block">Scene 11 · Identity</span>
+                <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body block">Scene 08 · Identity</span>
 
                 {/* Devanagari Companion Morph */}
                 <div className="min-h-[90px] sm:min-h-[120px] flex items-center justify-center">
@@ -1101,11 +1318,11 @@
             </section>
 
 
-            {/* SCENE 12: CONCLUSION */}
+            {/* SCENE 09: THE CONCLUSION */}
             <section id="location" className="relative z-10 py-24 sm:py-36 px-4 sm:px-12 lg:px-20 bg-[#070706] border-t border-[#1f1e1a] text-center">
               <div ref={conclusionCardRef} className="max-w-3xl mx-auto space-y-8 sm:space-y-10 will-change-transform">
                 
-                <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body">The Conclusion</p>
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body">Scene 09 · The Conclusion</p>
 
                 <h2 ref={conclusionTitleRef} className="font-display text-3xl sm:text-6xl font-normal text-[#f5f2eb] leading-tight px-2 will-change-transform">
                   Ready for your next version?
@@ -1127,47 +1344,133 @@
               </div>
             </section>
 
-            {/* LUXURY EDITORIAL FOOTER */}
-            <footer ref={footerRef} className="relative z-10 py-16 sm:py-24 px-4 sm:px-12 lg:px-20 bg-[#070706] border-t border-[#1f1e1a]">
-              <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-16 items-start pb-12 sm:pb-16 border-b border-[#1f1e1a]">
+            {/* LUXURY EDITORIAL FOOTER WITH GOOGLE MAP */}
+            <footer id="location" ref={footerRef} className="relative z-10 py-16 sm:py-24 px-4 sm:px-12 lg:px-20 bg-[#070706] border-t border-[#1f1e1a]">
+              <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
                 
-                <div className="md:col-span-5 space-y-4">
-                  <span className="font-display font-medium text-xl sm:text-2xl tracking-[0.2em] text-[#f5f2eb] block">
-                    THE HAIR AVENUE
-                  </span>
-                  <p className="text-xs text-[#9c978e] font-body max-w-sm leading-relaxed">
-                    Unisex Luxury Salon & Cosmetology Studio. Architectural haircuts, balayage restoration, hydra-purification, and precision grooming.
-                  </p>
-                  <span className="text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body block pt-2">
-                    Dabholkar Corner · Kolhapur
-                  </span>
+                {/* Upper Section: Location Info & Interactive Google Map */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-stretch">
+                  
+                  {/* Left Column: Salon Details, Contact & Hours (5 Cols on LG) */}
+                  <div className="lg:col-span-5 flex flex-col justify-between space-y-6 sm:space-y-8">
+                    <div className="space-y-6">
+                      <div>
+                        <span className="text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body block mb-2">SALON HEADQUARTERS</span>
+                        <h3 className="font-display font-medium text-2xl sm:text-3xl tracking-[0.15em] text-[#f5f2eb]">
+                          THE HAIR AVENUE
+                        </h3>
+                        <p className="text-xs text-[#9c978e] font-body mt-2 leading-relaxed">
+                          Kolhapur's Premier Unisex Salon & Cosmetology Studio. Precision haircuts, balayage, hydra-purification, and bespoke grooming rituals.
+                        </p>
+                      </div>
+
+                      {/* Address Card */}
+                      <div className="p-5 bg-[#0e0e0c] border border-[#252420] space-y-3.5">
+                        <div className="flex items-start gap-3">
+                          <span className="text-base text-[#cbb074] mt-0.5">📍</span>
+                          <div className="text-xs font-body leading-relaxed">
+                            <p className="font-medium text-[#f5f2eb]">Dabholkar Corner, Cross Road Apartments</p>
+                            <p className="text-[#9c978e]">Kolhapur, Maharashtra 416003</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 pt-3 border-t border-[#1a1916]">
+                          <span className="text-sm text-[#cbb074]">📞</span>
+                          <div className="text-xs font-body">
+                            <span className="text-[#9c978e]">Direct Reservations: </span>
+                            <a href="tel:09595073807" className="text-[#f5f2eb] hover:text-[#cbb074] font-medium transition-colors">095950 73807</a>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Operating Hours */}
+                      <div className="space-y-2 text-xs font-body">
+                        <div className="flex justify-between items-center py-2 border-b border-[#1a1916]">
+                          <span className="text-[#9c978e]">Monday – Sunday</span>
+                          <span className="text-[#f5f2eb] font-medium">9:00 AM – 9:30 PM</span>
+                        </div>
+                        <div className="flex justify-between items-center py-2 border-b border-[#1a1916]">
+                          <span className="text-[#9c978e]">VIP Appointments</span>
+                          <span className="text-[#cbb074]">Advance Booking</span>
+                        </div>
+                        <div className="flex justify-between items-center py-2 border-b border-[#1a1916]">
+                          <span className="text-[#9c978e]">Guest Parking</span>
+                          <span className="text-[#cbb074]">Free On-Site Parking</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3 pt-2">
+                      <button
+                        onClick={() => { setBookingConfirmed(false); setBookingOpen(true); }}
+                        className="btn-cinema text-xs px-6 py-3.5 flex-1 justify-center text-center"
+                      >
+                        RESERVE NOW
+                      </button>
+                      <a
+                        href="https://maps.google.com/?q=The+Hair+Avenue+Dabholkar+Corner+Kolhapur+Maharashtra+416003"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-5 py-3.5 bg-[#141412] border border-[#252420] text-[#f5f2eb] text-[10px] uppercase tracking-[0.2em] hover:border-[#cbb074] hover:text-[#cbb074] transition-all flex items-center gap-2 justify-center"
+                      >
+                        <span>DIRECTIONS ↗</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Interactive Google Maps Embed (7 Cols on LG) */}
+                  <div className="lg:col-span-7 flex flex-col">
+                    <div className="relative w-full h-full min-h-[360px] sm:min-h-[420px] bg-[#0e0e0c] border border-[#252420] overflow-hidden group hover:border-[#cbb074]/60 transition-colors shadow-2xl flex flex-col">
+                      
+                      {/* Map Header Status Bar */}
+                      <div className="px-4 sm:px-6 py-3 bg-[#141412] border-b border-[#252420] flex items-center justify-between z-10">
+                        <div className="flex items-center gap-2.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                          <span className="text-[10px] uppercase tracking-[0.2em] text-[#f5f2eb] font-body font-medium">GOOGLE MAPS · SALON LOCATION</span>
+                        </div>
+                        <span className="text-[10px] uppercase tracking-[0.15em] text-[#cbb074] font-body font-medium">DABHOLKAR CORNER</span>
+                      </div>
+
+                      {/* Map Iframe */}
+                      <div className="relative flex-1 w-full min-h-[280px]">
+                        <iframe
+                          title="The Hair Avenue Salon Google Maps Location"
+                          src="https://maps.google.com/maps?q=The%20Hair%20Avenue%20Dabholkar%20Corner%20Kolhapur%20Maharashtra%20416003&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                          className="w-full h-full border-0 absolute inset-0 filter grayscale-[20%] contrast-[105%] brightness-[94%] hover:filter-none transition-all duration-700"
+                          allowFullScreen=""
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                      </div>
+
+                      {/* Map Footer Bar */}
+                      <div className="px-4 sm:px-6 py-3.5 bg-[#141412] border-t border-[#252420] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 z-10">
+                        <div className="text-[10px] font-body text-[#9c978e] flex items-center gap-2">
+                          <span>🚆 5 mins from Kolhapur Railway Station</span>
+                          <span className="hidden sm:inline text-[#5c5850]">•</span>
+                          <span className="hidden sm:inline">Rankala Lake: 8 mins</span>
+                        </div>
+                        <a
+                          href="https://maps.google.com/?q=The+Hair+Avenue+Dabholkar+Corner+Kolhapur+Maharashtra+416003"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[10px] uppercase tracking-[0.15em] text-[#cbb074] hover:text-[#f5f2eb] font-body font-semibold flex items-center gap-1 transition-colors"
+                        >
+                          Open in Google Maps App ↗
+                        </a>
+                      </div>
+
+                    </div>
+                  </div>
+
                 </div>
 
-                <div className="md:col-span-3 space-y-3">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#f5f2eb] font-body block mb-2">OPERATING HOURS</span>
-                  <p className="text-xs text-[#9c978e] font-body">Monday – Sunday: 9:00 AM – 9:00 PM</p>
-                  <p className="text-xs text-[#9c978e] font-body">VIP Appointments: Advance Booking</p>
-                  <p className="text-xs text-[#cbb074] font-body pt-1">+91 95950 73807</p>
+                {/* Bottom Bar: Copyright & Location Tags */}
+                <div className="pt-8 border-t border-[#1f1e1a] flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-[#5c5850] font-body">
+                  <span>© {new Date().getFullYear()} THE HAIR AVENUE UNISEX SALON. ALL RIGHTS RESERVED.</span>
+                  <span>DABHOLKAR CORNER · KOLHAPUR · MAHARASHTRA 416003</span>
                 </div>
 
-                <div className="md:col-span-4 space-y-4">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#f5f2eb] font-body block mb-2">EXPERIENCE PASS</span>
-                  <p className="text-xs text-[#9c978e] font-body">
-                    Walk in carrying yesterday. Leave room for tomorrow.
-                  </p>
-                  <button
-                    onClick={() => { setBookingConfirmed(false); setBookingOpen(true); }}
-                    className="px-6 py-2.5 bg-[#141412] border border-[#252420] text-[#f5f2eb] text-[10px] uppercase tracking-[0.2em] hover:border-[#cbb074] hover:text-[#cbb074] transition-all"
-                  >
-                    RESERVE NOW
-                  </button>
-                </div>
-
-              </div>
-
-              <div className="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] uppercase tracking-[0.2em] text-[#5c5850] font-body">
-                <span>© {new Date().getFullYear()} THE HAIR AVENUE UNISEX SALON. ALL RIGHTS RESERVED.</span>
-                <span>KOLHAPUR · MAHARASHTRA</span>
               </div>
             </footer>
 
@@ -1214,8 +1517,8 @@
                   <form onSubmit={(e) => { e.preventDefault(); setBookingConfirmed(true); }} className="space-y-5 sm:space-y-6">
                     <div>
                       <label className="block text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#9c978e] font-body mb-2 sm:mb-3">1. Select Experience</label>
-                      <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs font-body">
-                        {['Hair', 'Colour', 'Skin', 'Grooming', 'Beauty', 'Not Sure Yet'].map((item) => (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 text-xs font-body">
+                        {['Hair', 'Skin & Beard', 'Bridal', 'Not Sure Yet'].map((item) => (
                           <button
                             key={item}
                             type="button"
