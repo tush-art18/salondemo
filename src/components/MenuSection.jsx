@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function MenuSection({ onSelectSitting }) {
   const [activeTab, setActiveTab] = useState('All');
+  const craftGridRef = useRef(null);
 
   const sittings = [
     {
@@ -12,7 +13,8 @@ export default function MenuSection({ onSelectSitting }) {
       price: '₹450',
       duration: '45 min',
       badge: 'CRAFT · 01',
-      bg: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80'
+      bg: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80',
+      delay: '100ms'
     },
     {
       id: 'h3',
@@ -23,7 +25,8 @@ export default function MenuSection({ onSelectSitting }) {
       duration: '45 min',
       badge: 'THE HAIR AVENUE · SIGNATURE',
       highlight: true,
-      bg: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80'
+      bg: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80',
+      delay: '40ms'
     },
     {
       id: 'h2',
@@ -33,7 +36,8 @@ export default function MenuSection({ onSelectSitting }) {
       price: '₹3,200',
       duration: '90 min',
       badge: 'AMBER GLOSS',
-      bg: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=80'
+      bg: '/GlobalColour.jpeg',
+      delay: '300ms'
     },
     {
       id: 'sb1',
@@ -43,7 +47,8 @@ export default function MenuSection({ onSelectSitting }) {
       price: '₹350',
       duration: '35 min',
       badge: 'BEARD ARCHITECTURE',
-      bg: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80'
+      bg: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80',
+      delay: '160ms'
     },
     {
       id: 'h4',
@@ -53,7 +58,8 @@ export default function MenuSection({ onSelectSitting }) {
       price: '₹4,500',
       duration: '120 min',
       badge: 'OVER 10,000+ SITTINGS',
-      bg: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80'
+      bg: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
+      delay: '260ms'
     },
     {
       id: 'sb2',
@@ -63,7 +69,8 @@ export default function MenuSection({ onSelectSitting }) {
       price: '₹2,800',
       duration: '60 min',
       badge: 'SKIN & PURIFICATION',
-      bg: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80'
+      bg: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80',
+      delay: '80ms'
     },
     {
       id: 'b1',
@@ -73,9 +80,40 @@ export default function MenuSection({ onSelectSitting }) {
       price: '₹12,500',
       duration: '180 min',
       badge: 'HAUTE BRIDAL ATELIER',
-      bg: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80'
+      bg: '/BridalMakeup.jpeg',
+      delay: '220ms'
     }
   ];
+
+  useEffect(() => {
+    if (craftGridRef.current && window.gsap) {
+      const cards = craftGridRef.current.querySelectorAll('.group');
+      window.gsap.killTweensOf(cards);
+      window.gsap.fromTo(
+        cards,
+        {
+          y: (i) => Math.sin((i + 1) * 99) * 16,
+          scale: 0.94,
+          opacity: 0.4,
+          rotation: (i) => Math.cos((i + 1) * 77) * 1.5,
+        },
+        {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          rotation: 0,
+          duration: 0.55,
+          stagger: {
+            amount: 0.38,
+            from: "random",
+            ease: "power2.out"
+          },
+          ease: "back.out(1.4)",
+          clearProps: "transform,rotation"
+        }
+      );
+    }
+  }, [activeTab]);
 
   const handleSittingClick = (sitting) => {
     if (onSelectSitting) {
@@ -83,9 +121,35 @@ export default function MenuSection({ onSelectSitting }) {
     }
   };
 
-  const isDimmed = (category) => {
-    if (activeTab === 'All') return false;
-    return activeTab !== category;
+  const getCardFilterClass = (category) => {
+    if (activeTab === 'All') {
+      return 'opacity-100 scale-100 border-white/10 hover:border-[#cbb074]/60 hover:shadow-[0_8px_30px_rgba(203,176,116,0.15)]';
+    }
+    if (activeTab === category) {
+      return 'opacity-100 scale-[1.01] border border-[#cbb074]/70 shadow-[0_8px_32px_rgba(203,176,116,0.18)] z-20';
+    }
+    return 'opacity-20 scale-[0.98] filter grayscale-[80%] brightness-[55%] border-white/5 pointer-events-none';
+  };
+
+  const getBadgeClass = (category) => {
+    if (activeTab !== 'All' && activeTab === category) {
+      return 'text-[#cbb074] bg-[#cbb074]/15 border border-[#cbb074]/40 font-semibold px-2 py-0.5 rounded';
+    }
+    return 'text-[#cbb074] font-semibold';
+  };
+
+  const getPricePillClass = (category) => {
+    if (activeTab !== 'All' && activeTab === category) {
+      return 'bg-[#cbb074] text-[#070706] font-semibold px-2.5 py-0.5 rounded-full shadow-sm';
+    }
+    return 'text-[#f5f2eb] bg-white/15 backdrop-blur-md border border-white/20 group-hover:bg-[#cbb074] group-hover:text-[#070706]';
+  };
+
+  const getImageFilterClass = (category) => {
+    if (activeTab !== 'All' && activeTab === category) {
+      return 'brightness-[100%] contrast-[105%]';
+    }
+    return 'contrast-115 brightness-[80%] group-hover:scale-105';
   };
 
   return (
@@ -114,7 +178,7 @@ export default function MenuSection({ onSelectSitting }) {
                 onClick={() => setActiveTab(tab)}
                 className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.15em] font-body font-medium transition-all duration-300 cursor-pointer ${
                   activeTab === tab
-                    ? 'bg-[#f5f2eb] text-[#070706] shadow-[0_0_20px_rgba(245,242,235,0.3)] scale-105 font-semibold'
+                    ? 'bg-[#f5f2eb] text-[#070706] shadow-[0_0_20px_rgba(245,242,235,0.4)] scale-105 font-bold'
                     : 'bg-[#141412] text-[#9c978e] border border-[#252420] hover:text-[#f5f2eb] hover:border-[#cbb074]/50'
                 }`}
               >
@@ -124,8 +188,8 @@ export default function MenuSection({ onSelectSitting }) {
           </div>
         </div>
 
-        {/* BENTO GRID (COMPACT SINGLE-FRAME SIZING) */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 lg:gap-5">
+        {/* BENTO GRID */}
+        <div ref={craftGridRef} className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 lg:gap-5">
           
           {/* ================= LEFT COLUMN (4 COLS) ================= */}
           <div className="md:col-span-4 flex flex-col gap-3 sm:gap-4 lg:gap-5">
@@ -133,22 +197,21 @@ export default function MenuSection({ onSelectSitting }) {
             {/* TILE 1: Top Left - Signature Cut */}
             <div
               onClick={() => handleSittingClick(sittings[0])}
-              className={`group relative h-[185px] sm:h-[200px] lg:h-[215px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_30px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#12110f] shadow-xl cursor-pointer p-4 sm:p-5 flex flex-col justify-between ${
-                isDimmed('Hair') ? 'opacity-30 scale-[0.98]' : 'opacity-100'
-              }`}
+              style={{ transitionDelay: activeTab !== 'All' ? sittings[0].delay : '0ms' }}
+              className={`group relative h-[185px] sm:h-[200px] lg:h-[215px] rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 bg-[#12110f] shadow-xl cursor-pointer p-4 sm:p-5 flex flex-col justify-between ${getCardFilterClass('Hair')}`}
             >
               <img
                 src={sittings[0].bg}
                 alt={sittings[0].name}
-                className="absolute inset-0 w-full h-full object-cover filter contrast-115 brightness-[80%] group-hover:scale-110 group-hover:filter-none transition-all duration-1000 ease-out"
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${getImageFilterClass('Hair')}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 group-hover:opacity-80 transition-opacity duration-700"></div>
 
               <div className="relative z-10 flex items-center justify-between">
-                <span className="text-[9px] uppercase tracking-[0.2em] text-[#cbb074] font-body font-semibold group-hover:text-white transition-colors">
+                <span className={`text-[9px] uppercase tracking-[0.2em] font-body transition-all ${getBadgeClass('Hair')}`}>
                   {sittings[0].badge}
                 </span>
-                <span className="text-[11px] sm:text-xs font-semibold text-[#f5f2eb] bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all duration-500">
+                <span className={`text-[11px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full transition-all duration-500 ${getPricePillClass('Hair')}`}>
                   {sittings[0].price}
                 </span>
               </div>
@@ -170,19 +233,18 @@ export default function MenuSection({ onSelectSitting }) {
             {/* TILE 2: Bottom Left - Gold Balayage */}
             <div
               onClick={() => handleSittingClick(sittings[4])}
-              className={`group relative h-[215px] sm:h-[235px] lg:h-[250px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_30px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#0d0c0a] shadow-xl cursor-pointer p-4 sm:p-5 flex flex-col justify-between ${
-                isDimmed('Hair') ? 'opacity-30 scale-[0.98]' : 'opacity-100'
-              }`}
+              style={{ transitionDelay: activeTab !== 'All' ? sittings[4].delay : '0ms' }}
+              className={`group relative h-[215px] sm:h-[235px] lg:h-[250px] rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 bg-[#0d0c0a] shadow-xl cursor-pointer p-4 sm:p-5 flex flex-col justify-between ${getCardFilterClass('Hair')}`}
             >
               <img
                 src={sittings[4].bg}
                 alt={sittings[4].name}
-                className="absolute inset-0 w-full h-full object-cover filter contrast-120 brightness-[65%] group-hover:scale-110 group-hover:filter-none transition-all duration-1000 ease-out"
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${getImageFilterClass('Hair')}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30 group-hover:opacity-85 transition-opacity duration-700"></div>
 
               <div className="relative z-10 flex items-center justify-between">
-                <span className="text-[9px] uppercase tracking-[0.25em] text-[#9c978e] font-body group-hover:text-[#cbb074] transition-colors">
+                <span className={`text-[9px] uppercase tracking-[0.25em] font-body transition-all ${getBadgeClass('Hair')}`}>
                   HAIR RESTORATION
                 </span>
                 <span className="text-[8px] uppercase tracking-[0.2em] text-[#070706] bg-[#cbb074] font-body font-semibold px-2 py-0.5 rounded-full">
@@ -216,23 +278,22 @@ export default function MenuSection({ onSelectSitting }) {
             {/* TILE 3: Top Right - Wide Hero Akhada Sculpt */}
             <div
               onClick={() => handleSittingClick(sittings[1])}
-              className={`group relative h-[185px] sm:h-[200px] lg:h-[215px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_35px_rgba(203,176,116,0.25)] transition-all duration-700 bg-[#12110f] shadow-xl cursor-pointer p-4 sm:p-5 lg:p-6 flex flex-col justify-between ${
-                isDimmed('Hair') ? 'opacity-30 scale-[0.98]' : 'opacity-100'
-              }`}
+              style={{ transitionDelay: activeTab !== 'All' ? sittings[1].delay : '0ms' }}
+              className={`group relative h-[185px] sm:h-[200px] lg:h-[215px] rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 bg-[#12110f] shadow-xl cursor-pointer p-4 sm:p-5 lg:p-6 flex flex-col justify-between ${getCardFilterClass('Hair')}`}
             >
               <img
                 src={sittings[1].bg}
                 alt={sittings[1].name}
-                className="absolute inset-0 w-full h-full object-cover filter contrast-125 brightness-[70%] group-hover:scale-108 group-hover:filter-none transition-all duration-1000 ease-out"
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${getImageFilterClass('Hair')}`}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-black/30 group-hover:opacity-85 transition-opacity duration-700"></div>
 
               <div className="relative z-10 flex items-center justify-between">
-                <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body font-semibold flex items-center gap-1.5">
+                <span className={`text-[9px] sm:text-[10px] uppercase tracking-[0.25em] font-body flex items-center gap-1.5 transition-all ${getBadgeClass('Hair')}`}>
                   <span className="w-1.5 h-1.5 rounded-full bg-[#cbb074] animate-ping inline-block"></span>
                   {sittings[1].badge}
                 </span>
-                <span className="text-[11px] sm:text-xs font-semibold text-[#f5f2eb] bg-white/15 backdrop-blur-md px-3 py-0.5 rounded-full border border-white/20 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all duration-500">
+                <span className={`text-[11px] sm:text-xs font-semibold px-3 py-0.5 rounded-full transition-all duration-500 ${getPricePillClass('Hair')}`}>
                   {sittings[1].duration} · {sittings[1].price}
                 </span>
               </div>
@@ -262,22 +323,21 @@ export default function MenuSection({ onSelectSitting }) {
               {/* Tile 4: Amber Gloss - Global Colour */}
               <div
                 onClick={() => handleSittingClick(sittings[2])}
-                className={`group relative h-[105px] sm:h-[115px] lg:h-[122px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_6px_25px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#15120e] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${
-                  isDimmed('Hair') ? 'opacity-30 scale-[0.98]' : 'opacity-100'
-                }`}
+                style={{ transitionDelay: activeTab !== 'All' ? sittings[2].delay : '0ms' }}
+                className={`group relative h-[105px] sm:h-[115px] lg:h-[122px] rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 bg-[#15120e] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${getCardFilterClass('Hair')}`}
               >
                 <img
                   src={sittings[2].bg}
                   alt={sittings[2].name}
-                  className="absolute inset-0 w-full h-full object-cover filter contrast-110 brightness-[75%] group-hover:scale-112 group-hover:filter-none transition-all duration-1000 ease-out"
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${getImageFilterClass('Hair')}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/20 group-hover:opacity-80 transition-opacity duration-700"></div>
 
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#cbb074] font-body font-medium">
+                  <span className={`text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-body transition-all ${getBadgeClass('Hair')}`}>
                     {sittings[2].badge}
                   </span>
-                  <span className="text-[10px] sm:text-xs font-semibold text-white bg-white/15 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all">
+                  <span className={`text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full transition-all ${getPricePillClass('Hair')}`}>
                     {sittings[2].price}
                   </span>
                 </div>
@@ -296,22 +356,21 @@ export default function MenuSection({ onSelectSitting }) {
               {/* Tile 5: Razor Steel - Precision Beard */}
               <div
                 onClick={() => handleSittingClick(sittings[3])}
-                className={`group relative h-[105px] sm:h-[115px] lg:h-[122px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_6px_25px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#121110] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${
-                  isDimmed('Skin & Beard') ? 'opacity-30 scale-[0.98]' : 'opacity-100'
-                }`}
+                style={{ transitionDelay: activeTab !== 'All' ? sittings[3].delay : '0ms' }}
+                className={`group relative h-[105px] sm:h-[115px] lg:h-[122px] rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 bg-[#12110f] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${getCardFilterClass('Skin & Beard')}`}
               >
                 <img
                   src={sittings[3].bg}
                   alt={sittings[3].name}
-                  className="absolute inset-0 w-full h-full object-cover filter contrast-120 brightness-[70%] group-hover:scale-112 group-hover:filter-none transition-all duration-1000 ease-out"
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${getImageFilterClass('Skin & Beard')}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/20 group-hover:opacity-80 transition-opacity duration-700"></div>
 
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#cbb074] font-body font-medium">
+                  <span className={`text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-body transition-all ${getBadgeClass('Skin & Beard')}`}>
                     {sittings[3].badge}
                   </span>
-                  <span className="text-[10px] sm:text-xs font-semibold text-white bg-white/15 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all">
+                  <span className={`text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full transition-all ${getPricePillClass('Skin & Beard')}`}>
                     {sittings[3].price}
                   </span>
                 </div>
@@ -335,22 +394,21 @@ export default function MenuSection({ onSelectSitting }) {
               {/* Tile 6: Hydra Mist - Hydra Facial */}
               <div
                 onClick={() => handleSittingClick(sittings[5])}
-                className={`sm:col-span-5 group relative h-[120px] sm:h-[130px] lg:h-[138px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_25px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#0b120f] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${
-                  isDimmed('Skin & Beard') ? 'opacity-30 scale-[0.98]' : 'opacity-100'
-                }`}
+                style={{ transitionDelay: activeTab !== 'All' ? sittings[5].delay : '0ms' }}
+                className={`sm:col-span-5 group relative h-[120px] sm:h-[130px] lg:h-[138px] rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 bg-[#0b120f] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${getCardFilterClass('Skin & Beard')}`}
               >
                 <img
                   src={sittings[5].bg}
                   alt={sittings[5].name}
-                  className="absolute inset-0 w-full h-full object-cover filter contrast-115 brightness-[70%] group-hover:scale-110 group-hover:filter-none transition-all duration-1000 ease-out"
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${getImageFilterClass('Skin & Beard')}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/25 group-hover:opacity-85 transition-opacity duration-700"></div>
 
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#cbb074] font-body font-semibold">
+                  <span className={`text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-body transition-all ${getBadgeClass('Skin & Beard')}`}>
                     {sittings[5].badge}
                   </span>
-                  <span className="text-[10px] sm:text-xs font-semibold text-white bg-white/15 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all">
+                  <span className={`text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full transition-all ${getPricePillClass('Skin & Beard')}`}>
                     {sittings[5].price}
                   </span>
                 </div>
@@ -366,22 +424,21 @@ export default function MenuSection({ onSelectSitting }) {
               {/* Tile 7: Opulent Royal Glam - Bridal Atelier */}
               <div
                 onClick={() => handleSittingClick(sittings[6])}
-                className={`sm:col-span-7 group relative h-[120px] sm:h-[130px] lg:h-[138px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_30px_rgba(203,176,116,0.25)] transition-all duration-700 bg-[#16120b] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${
-                  isDimmed('Bridal') ? 'opacity-30 scale-[0.98]' : 'opacity-100'
-                }`}
+                style={{ transitionDelay: activeTab !== 'All' ? sittings[6].delay : '0ms' }}
+                className={`sm:col-span-7 group relative h-[120px] sm:h-[130px] lg:h-[138px] rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 bg-[#16120b] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${getCardFilterClass('Bridal')}`}
               >
                 <img
                   src={sittings[6].bg}
                   alt={sittings[6].name}
-                  className="absolute inset-0 w-full h-full object-cover filter contrast-120 brightness-[75%] group-hover:scale-110 group-hover:filter-none transition-all duration-1000 ease-out"
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${getImageFilterClass('Bridal')}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-black/35 group-hover:opacity-85 transition-opacity duration-700"></div>
 
                 <div className="relative z-10 flex items-center justify-between">
-                  <span className="text-[9px] uppercase tracking-[0.25em] text-[#cbb074] font-body font-semibold">
+                  <span className={`text-[9px] uppercase tracking-[0.25em] font-body transition-all ${getBadgeClass('Bridal')}`}>
                     {sittings[6].badge}
                   </span>
-                  <span className="text-[10px] sm:text-xs font-semibold text-[#070706] bg-[#cbb074] px-2.5 py-0.5 rounded-full font-body font-medium shadow-sm">
+                  <span className={`text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full font-body transition-all shadow-sm ${getPricePillClass('Bridal')}`}>
                     {sittings[6].duration} Sitting
                   </span>
                 </div>
