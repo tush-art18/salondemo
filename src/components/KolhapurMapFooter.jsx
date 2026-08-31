@@ -3,13 +3,13 @@ import React from 'react';
 export default function KolhapurMapFooter({ onOpenBooking }) {
   return (
     <footer id="location" className="py-24 sm:py-32 px-4 sm:px-10 lg:px-16 bg-[#070706] border-t border-[#1f1e1a]">
-      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
+      <div className="mx-auto space-y-12 max-w-7xl sm:space-y-16">
         
         {/* Main Grid: Details & Map */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+        <div className="grid items-stretch grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           
           {/* Salon Details (Col 5) */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
+          <div className="flex flex-col justify-between space-y-8 lg:col-span-5">
             <div className="space-y-6">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body block mb-2">SALON HEADQUARTERS</span>
@@ -73,7 +73,7 @@ export default function KolhapurMapFooter({ onOpenBooking }) {
           </div>
 
           {/* Interactive Google Map (Col 7) */}
-          <div className="lg:col-span-7 flex flex-col">
+          <div className="flex flex-col lg:col-span-7">
             <div className="relative w-full h-full min-h-[360px] sm:min-h-[420px] bg-[#0e0e0c] border border-[#252420] overflow-hidden group hover:border-[#cbb074]/60 transition-colors shadow-2xl flex flex-col">
               
               {/* Map Header */}

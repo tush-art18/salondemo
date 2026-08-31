@@ -129,7 +129,7 @@
       const footerRef = useRef(null);
 
       const [bookingOpen, setBookingOpen] = useState(false);
-      const [selectedCategory, setSelectedCategory] = useState('Hair');
+      const [selectedCategory, setSelectedCategory] = useState('All');
       const [sliderPosition, setSliderPosition] = useState(50);
       const [devanagariState, setDevanagariState] = useState(0);
       const [bookingData, setBookingData] = useState({ service: 'Hair', stylist: 'Arjun', date: '', time: '11:00 AM', name: '', phone: '' });
@@ -933,15 +933,14 @@
                   {/* Male Portrait Panel */}
                   <div 
                     ref={unisexMaleRef}
-                    className="group relative h-[480px] sm:h-[620px] lg:h-[700px] overflow-hidden border border-[#252420] hover:border-[#cbb074]/60 transition-all duration-700 bg-[#12110f] shadow-2xl cursor-pointer"
+                    className="group relative h-[480px] sm:h-[620px] lg:h-[700px] overflow-hidden border border-[#252420] bg-[#12110f] shadow-2xl"
                   >
                     <img 
                       src={images.unisexMale} 
                       alt="Gentlemen Styling - The Hair Avenue" 
-                      className="w-full h-full object-cover object-center filter grayscale contrast-[112%] brightness-[92%] group-hover:grayscale-0 group-hover:contrast-[108%] group-hover:saturate-[120%] group-hover:scale-105 transition-all duration-700 ease-out"
+                      className="w-full h-full object-cover object-center"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-[#070706]/20 to-transparent group-hover:opacity-60 transition-opacity duration-700"></div>
-                    <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-[#070706]/20 to-transparent"></div>
 
                     {/* Corner Minimal Badge */}
                     <div className="absolute top-5 left-5 px-3 py-1.5 bg-[#070706]/85 backdrop-blur-md border border-[#252420] text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#f5f2eb] font-body">
@@ -954,7 +953,7 @@
                         <span className="text-[9px] uppercase tracking-[0.25em] text-[#cbb074] font-body block">
                           PRECISION & ARCHITECTURE
                         </span>
-                        <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">
+                        <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal">
                           Gentlemen's Couture
                         </h3>
                       </div>
@@ -967,15 +966,14 @@
                   {/* Female Portrait Panel */}
                   <div 
                     ref={unisexFemaleRef}
-                    className="group relative h-[480px] sm:h-[620px] lg:h-[700px] overflow-hidden border border-[#252420] hover:border-[#cbb074]/60 transition-all duration-700 bg-[#12110f] shadow-2xl cursor-pointer"
+                    className="group relative h-[480px] sm:h-[620px] lg:h-[700px] overflow-hidden border border-[#252420] bg-[#12110f] shadow-2xl"
                   >
                     <img 
                       src={images.unisexFemale} 
                       alt="Women Couture - The Hair Avenue" 
-                      className="w-full h-full object-cover object-center filter grayscale contrast-[112%] brightness-[92%] group-hover:grayscale-0 group-hover:contrast-[108%] group-hover:saturate-[120%] group-hover:scale-105 transition-all duration-700 ease-out"
+                      className="w-full h-full object-cover object-center"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-[#070706]/20 to-transparent group-hover:opacity-60 transition-opacity duration-700"></div>
-                    <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent transition-colors duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-[#070706]/20 to-transparent"></div>
 
                     {/* Corner Minimal Badge */}
                     <div className="absolute top-5 left-5 px-3 py-1.5 bg-[#070706]/85 backdrop-blur-md border border-[#252420] text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#f5f2eb] font-body">
@@ -988,7 +986,7 @@
                         <span className="text-[9px] uppercase tracking-[0.25em] text-[#cbb074] font-body block">
                           HAUTE & RADIANCE
                         </span>
-                        <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">
+                        <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal">
                           Women's Haute Coiffure
                         </h3>
                       </div>
@@ -1004,78 +1002,351 @@
             </section>
 
 
-            {/* SCENE 04: THE MENU */}
-            <section id="services" className="relative z-10 py-20 sm:py-32 px-4 sm:px-12 lg:px-20 bg-[#0e0e0c] border-t border-[#1f1e1a]">
-              <div className="max-w-7xl mx-auto">
+            {/* SCENE 04: THE MENU (COMPACT BENTO GRID FITTING ONE FRAME) */}
+            <section id="services" className="relative z-10 py-10 sm:py-14 lg:py-16 px-4 sm:px-8 lg:px-14 bg-[#070706] border-t border-[#1f1e1a]">
+              <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
                 
-                {/* Section Title & Subhead */}
-                <div className="mb-10 sm:mb-14">
-                  <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#cbb074] font-body block mb-2 sm:mb-3">
-                    Scene 04 · The Menu
-                  </span>
-                  <h2 ref={craftTitleRef} className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal text-[#f5f2eb] tracking-tight">
-                    The Menu
-                  </h2>
-                  <p className="mt-2 sm:mt-3 text-base sm:text-xl text-[#9c978e] font-display italic">
-                    Not services. Sittings.
-                  </p>
+                {/* Header & Category Filter Tabs */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#1f1e1a] pb-4 sm:pb-5">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body block mb-1">
+                      Scene 04 · The Menu
+                    </span>
+                    <h2 ref={craftTitleRef} className="font-display text-2xl sm:text-4xl lg:text-5xl font-normal text-[#f5f2eb] tracking-tight">
+                      The Menu
+                    </h2>
+                    <p className="mt-1 text-xs sm:text-base text-[#9c978e] font-display italic">
+                      Not services. Sittings.
+                    </p>
+                  </div>
+
+                  {/* Filter Pills */}
+                  <div ref={servicesTabsRef} className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                    {['All', 'Hair', 'Skin & Beard', 'Bridal'].map((tab) => (
+                      <button
+                        key={tab}
+                        onClick={() => setSelectedCategory(tab)}
+                        className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs uppercase tracking-[0.15em] font-body font-medium transition-all duration-300 cursor-pointer ${
+                          selectedCategory === tab
+                            ? 'bg-[#f5f2eb] text-[#070706] shadow-[0_0_20px_rgba(245,242,235,0.3)] scale-105 font-semibold'
+                            : 'bg-[#141412] text-[#9c978e] border border-[#252420] hover:text-[#f5f2eb] hover:border-[#cbb074]/50'
+                        }`}
+                      >
+                        {tab}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Category Filter Tabs */}
-                <div ref={servicesTabsRef} className="flex gap-6 sm:gap-10 overflow-x-auto no-scrollbar pb-4 sm:pb-5 mb-10 sm:mb-14 border-b border-[#1f1e1a]">
-                  {['Hair', 'Skin & Beard', 'Bridal'].map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`text-xs sm:text-sm uppercase tracking-[0.2em] font-body whitespace-nowrap py-2 transition-all relative ${
-                        selectedCategory === cat
-                          ? 'text-[#f5f2eb] font-semibold after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#cbb074]'
-                          : 'text-[#5c5850] hover:text-[#9c978e]'
+                {/* BENTO GRID */}
+                <div ref={craftGridRef} className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 lg:gap-5">
+                  
+                  {/* LEFT COLUMN (4 COLS) */}
+                  <div className="md:col-span-4 flex flex-col gap-3 sm:gap-4 lg:gap-5">
+                    
+                    {/* TILE 1: Top Left - Signature Cut */}
+                    <div
+                      onClick={() => {
+                        setBookingData({ ...bookingData, service: 'Signature Cut & Style' });
+                        setBookingConfirmed(false);
+                        setBookingOpen(true);
+                      }}
+                      className={`group relative h-[185px] sm:h-[200px] lg:h-[215px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_30px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#12110f] shadow-xl cursor-pointer p-4 sm:p-5 flex flex-col justify-between ${
+                        selectedCategory !== 'All' && selectedCategory !== 'Hair' ? 'opacity-30 scale-[0.98]' : 'opacity-100'
                       }`}
                     >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
+                      <img
+                        src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80"
+                        alt="Signature Cut & Style"
+                        className="absolute inset-0 w-full h-full object-cover filter contrast-115 brightness-[80%] group-hover:scale-110 group-hover:filter-none transition-all duration-1000 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20 group-hover:opacity-80 transition-opacity duration-700"></div>
 
-                {/* Plain, Highly Scannable Menu List */}
-                <div ref={craftGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                  {services.filter(s => s.type === selectedCategory).map((service) => (
+                      <div className="relative z-10 flex items-center justify-between">
+                        <span className="text-[9px] uppercase tracking-[0.2em] text-[#cbb074] font-body font-semibold group-hover:text-white transition-colors">
+                          CRAFT · 01
+                        </span>
+                        <span className="text-[11px] sm:text-xs font-semibold text-[#f5f2eb] bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/20 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all duration-500">
+                          ₹450
+                        </span>
+                      </div>
+
+                      <div className="relative z-10 space-y-1">
+                        <h3 className="font-display sm:font-sans font-semibold text-lg sm:text-xl lg:text-2xl text-white tracking-tight leading-tight group-hover:text-[#cbb074] transition-colors">
+                          Signature Cut
+                        </h3>
+                        <p className="text-[11px] sm:text-xs text-[#d4cfc7] font-body font-light line-clamp-1">
+                          Precision cut, wash, and finish.
+                        </p>
+                        <div className="pt-1.5 flex items-center justify-between text-[10px] sm:text-[11px] text-[#9c978e] font-body">
+                          <span className="group-hover:text-white transition-colors">⏱ 45 min</span>
+                          <span className="text-[#cbb074] group-hover:translate-x-1 transition-transform duration-300 font-medium">Reserve Sitting →</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* TILE 2: Bottom Left - Gold Balayage */}
                     <div
-                      key={service.id}
-                      className="p-6 sm:p-7 bg-[#12110f] border border-[#1f1e1a] hover:border-[#cbb074]/60 transition-all duration-300 flex flex-col justify-between space-y-5 group shadow-lg"
+                      onClick={() => {
+                        setBookingData({ ...bookingData, service: 'Gold Balayage & Colour Restoration' });
+                        setBookingConfirmed(false);
+                        setBookingOpen(true);
+                      }}
+                      className={`group relative h-[215px] sm:h-[235px] lg:h-[250px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_30px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#0d0c0a] shadow-xl cursor-pointer p-4 sm:p-5 flex flex-col justify-between ${
+                        selectedCategory !== 'All' && selectedCategory !== 'Hair' ? 'opacity-30 scale-[0.98]' : 'opacity-100'
+                      }`}
                     >
-                      <div className="space-y-2">
-                        <div className="flex items-baseline justify-between gap-4">
-                          <h3 className="font-display text-xl sm:text-2xl text-[#f5f2eb] font-normal group-hover:text-[#cbb074] transition-colors">
-                            {service.name}
-                          </h3>
-                          <span className="font-display text-lg sm:text-xl text-[#cbb074] font-medium whitespace-nowrap">
-                            {service.price}
+                      <img
+                        src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
+                        alt="Gold Balayage"
+                        className="absolute inset-0 w-full h-full object-cover filter contrast-120 brightness-[65%] group-hover:scale-110 group-hover:filter-none transition-all duration-1000 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30 group-hover:opacity-85 transition-opacity duration-700"></div>
+
+                      <div className="relative z-10 flex items-center justify-between">
+                        <span className="text-[9px] uppercase tracking-[0.25em] text-[#9c978e] font-body group-hover:text-[#cbb074] transition-colors">
+                          HAIR RESTORATION
+                        </span>
+                        <span className="text-[8px] uppercase tracking-[0.2em] text-[#070706] bg-[#cbb074] font-body font-semibold px-2 py-0.5 rounded-full">
+                          POPULAR
+                        </span>
+                      </div>
+
+                      <div className="relative z-10 space-y-1.5">
+                        <h3 className="font-display sm:font-sans font-semibold text-base sm:text-lg lg:text-xl text-white tracking-tight leading-snug group-hover:text-[#cbb074] transition-colors">
+                          Gold Balayage & Colour
+                        </h3>
+                        <p className="text-[11px] sm:text-xs text-[#9c978e] font-body leading-relaxed line-clamp-1">
+                          High-shine keratin colour lock with diamond infusion.
+                        </p>
+                        <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                          <span className="font-display text-sm sm:text-base text-[#cbb074] font-medium">
+                            120 min · ₹4,500
+                          </span>
+                          <span className="text-[10px] uppercase tracking-[0.15em] text-[#f5f2eb] bg-white/10 group-hover:bg-[#cbb074] group-hover:text-[#070706] px-3 py-1 rounded-full transition-all duration-500 font-medium">
+                            Book Sitting
                           </span>
                         </div>
-                        <p className="text-xs sm:text-sm text-[#9c978e] font-body leading-relaxed">
-                          {service.desc}
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* RIGHT MAIN AREA (8 COLS) */}
+                  <div className="md:col-span-8 flex flex-col gap-3 sm:gap-4 lg:gap-5">
+                    
+                    {/* TILE 3: Top Right - Wide Hero Akhada Sculpt */}
+                    <div
+                      onClick={() => {
+                        setBookingData({ ...bookingData, service: 'The Akhada Sculpt' });
+                        setBookingConfirmed(false);
+                        setBookingOpen(true);
+                      }}
+                      className={`group relative h-[185px] sm:h-[200px] lg:h-[215px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_35px_rgba(203,176,116,0.25)] transition-all duration-700 bg-[#12110f] shadow-xl cursor-pointer p-4 sm:p-5 lg:p-6 flex flex-col justify-between ${
+                        selectedCategory !== 'All' && selectedCategory !== 'Hair' ? 'opacity-30 scale-[0.98]' : 'opacity-100'
+                      }`}
+                    >
+                      <img
+                        src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80"
+                        alt="The Akhada Sculpt"
+                        className="absolute inset-0 w-full h-full object-cover filter contrast-125 brightness-[70%] group-hover:scale-108 group-hover:filter-none transition-all duration-1000 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-black/30 group-hover:opacity-85 transition-opacity duration-700"></div>
+
+                      <div className="relative z-10 flex items-center justify-between">
+                        <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body font-semibold flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#cbb074] animate-ping inline-block"></span>
+                          THE HAIR AVENUE · SIGNATURE
+                        </span>
+                        <span className="text-[11px] sm:text-xs font-semibold text-[#f5f2eb] bg-white/15 backdrop-blur-md px-3 py-0.5 rounded-full border border-white/20 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all duration-500">
+                          45 min · ₹450
+                        </span>
+                      </div>
+
+                      <div className="relative z-10 max-w-lg space-y-1">
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-display sm:font-sans font-bold text-white tracking-tight group-hover:text-[#cbb074] transition-colors leading-tight">
+                          The Akhada Sculpt
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-[#d4cfc7] font-body font-light max-w-md leading-relaxed line-clamp-1">
+                          Architectural precision haircut using imported Japanese steel shears.
                         </p>
                       </div>
 
-                      <div className="pt-4 border-t border-[#1a1916] flex items-center justify-between text-xs font-body">
-                        <span className="text-[#5c5850] tracking-[0.15em] uppercase flex items-center gap-1.5">
-                          <span>⏱</span> {service.duration}
+                      <div className="relative z-10 flex items-center justify-between text-[11px] sm:text-xs font-body">
+                        <span className="text-[#cbb074] font-medium flex items-center gap-1">
+                          <span>★</span> Kolhapur Signature Sitting
                         </span>
-                        <button
-                          onClick={() => {
-                            setBookingData({ ...bookingData, service: service.name });
-                            setBookingConfirmed(false);
-                            setBookingOpen(true);
-                          }}
-                          className="text-[10px] uppercase tracking-[0.2em] text-[#f5f2eb] group-hover:text-[#cbb074] transition-colors font-medium flex items-center gap-1 cursor-pointer"
-                        >
-                          Reserve Sitting →
-                        </button>
+                        <span className="text-white font-medium group-hover:translate-x-1.5 transition-transform duration-300">
+                          Experience Sitting →
+                        </span>
                       </div>
                     </div>
-                  ))}
+
+                    {/* TILE 4 & 5: Middle Row - 2 Split Capsule Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
+                      
+                      {/* Tile 4: Amber Gloss - Global Colour */}
+                      <div
+                        onClick={() => {
+                          setBookingData({ ...bookingData, service: 'Global Colour & Gloss' });
+                          setBookingConfirmed(false);
+                          setBookingOpen(true);
+                        }}
+                        className={`group relative h-[105px] sm:h-[115px] lg:h-[122px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_6px_25px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#15120e] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${
+                          selectedCategory !== 'All' && selectedCategory !== 'Hair' ? 'opacity-30 scale-[0.98]' : 'opacity-100'
+                        }`}
+                      >
+                        <img
+                          src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=80"
+                          alt="Global Colour & Gloss"
+                          className="absolute inset-0 w-full h-full object-cover filter contrast-110 brightness-[75%] group-hover:scale-112 group-hover:filter-none transition-all duration-1000 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/20 group-hover:opacity-80 transition-opacity duration-700"></div>
+
+                        <div className="relative z-10 flex items-center justify-between">
+                          <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#cbb074] font-body font-medium">
+                            AMBER GLOSS
+                          </span>
+                          <span className="text-[10px] sm:text-xs font-semibold text-white bg-white/15 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all">
+                            ₹3,200
+                          </span>
+                        </div>
+
+                        <div className="relative z-10">
+                          <h4 className="font-display sm:font-sans font-semibold text-sm sm:text-base lg:text-lg text-white tracking-tight group-hover:text-[#cbb074] transition-colors leading-tight">
+                            Global Colour & Gloss
+                          </h4>
+                          <p className="text-[10px] sm:text-[11px] text-[#d4cfc7] font-body flex items-center justify-between mt-0.5">
+                            <span>90 min sitting</span>
+                            <span className="text-[#cbb074] opacity-0 group-hover:opacity-100 transition-opacity">Reserve →</span>
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Tile 5: Razor Steel - Precision Beard */}
+                      <div
+                        onClick={() => {
+                          setBookingData({ ...bookingData, service: 'Precision Beard Sculpt' });
+                          setBookingConfirmed(false);
+                          setBookingOpen(true);
+                        }}
+                        className={`group relative h-[105px] sm:h-[115px] lg:h-[122px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_6px_25px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#121110] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${
+                          selectedCategory !== 'All' && selectedCategory !== 'Skin & Beard' ? 'opacity-30 scale-[0.98]' : 'opacity-100'
+                        }`}
+                      >
+                        <img
+                          src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80"
+                          alt="Precision Beard Sculpt"
+                          className="absolute inset-0 w-full h-full object-cover filter contrast-120 brightness-[70%] group-hover:scale-112 group-hover:filter-none transition-all duration-1000 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/20 group-hover:opacity-80 transition-opacity duration-700"></div>
+
+                        <div className="relative z-10 flex items-center justify-between">
+                          <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#cbb074] font-body font-medium">
+                            BEARD ARCHITECTURE
+                          </span>
+                          <span className="text-[10px] sm:text-xs font-semibold text-white bg-white/15 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/15 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all">
+                            ₹350
+                          </span>
+                        </div>
+
+                        <div className="relative z-10">
+                          <h4 className="font-display sm:font-sans font-semibold text-sm sm:text-base lg:text-lg text-white tracking-tight group-hover:text-[#cbb074] transition-colors leading-tight">
+                            Precision Beard Sculpt
+                          </h4>
+                          <p className="text-[10px] sm:text-[11px] text-[#d4cfc7] font-body flex items-center justify-between mt-0.5">
+                            <span>35 min · Hot towel</span>
+                            <span className="text-[#cbb074] opacity-0 group-hover:opacity-100 transition-opacity">Reserve →</span>
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {/* TILE 6 & 7: Bottom Row */}
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-4 lg:gap-5">
+                      
+                      {/* Tile 6: Hydra Mist - Hydra Facial */}
+                      <div
+                        onClick={() => {
+                          setBookingData({ ...bookingData, service: 'Hydra Facial' });
+                          setBookingConfirmed(false);
+                          setBookingOpen(true);
+                        }}
+                        className={`sm:col-span-5 group relative h-[120px] sm:h-[130px] lg:h-[138px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_25px_rgba(203,176,116,0.2)] transition-all duration-700 bg-[#0b120f] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${
+                          selectedCategory !== 'All' && selectedCategory !== 'Skin & Beard' ? 'opacity-30 scale-[0.98]' : 'opacity-100'
+                        }`}
+                      >
+                        <img
+                          src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80"
+                          alt="Hydra Facial"
+                          className="absolute inset-0 w-full h-full object-cover filter contrast-115 brightness-[70%] group-hover:scale-110 group-hover:filter-none transition-all duration-1000 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/25 group-hover:opacity-85 transition-opacity duration-700"></div>
+
+                        <div className="relative z-10 flex items-center justify-between">
+                          <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#cbb074] font-body font-semibold">
+                            SKIN & PURIFICATION
+                          </span>
+                          <span className="text-[10px] sm:text-xs font-semibold text-white bg-white/15 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15 group-hover:bg-[#cbb074] group-hover:text-[#070706] transition-all">
+                            60 min · ₹2,800
+                          </span>
+                        </div>
+
+                        <div className="relative z-10 space-y-0.5">
+                          <h4 className="font-display sm:font-sans font-semibold text-sm sm:text-base lg:text-lg text-white tracking-tight group-hover:text-[#cbb074] transition-colors leading-tight">
+                            Hydra Facial
+                          </h4>
+                          <p className="text-[10px] sm:text-[11px] text-[#d4cfc7] font-body">Deep-cleanse · 60 min</p>
+                        </div>
+                      </div>
+
+                      {/* Tile 7: Opulent Royal Glam - Bridal Atelier */}
+                      <div
+                        onClick={() => {
+                          setBookingData({ ...bookingData, service: 'Bridal Hair & Makeup' });
+                          setBookingConfirmed(false);
+                          setBookingOpen(true);
+                        }}
+                        className={`sm:col-span-7 group relative h-[120px] sm:h-[130px] lg:h-[138px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 hover:border-[#cbb074] hover:shadow-[0_8px_30px_rgba(203,176,116,0.25)] transition-all duration-700 bg-[#16120b] shadow-lg cursor-pointer p-3 sm:p-4 flex flex-col justify-between ${
+                          selectedCategory !== 'All' && selectedCategory !== 'Bridal' ? 'opacity-30 scale-[0.98]' : 'opacity-100'
+                        }`}
+                      >
+                        <img
+                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80"
+                          alt="Bridal Hair & Makeup"
+                          className="absolute inset-0 w-full h-full object-cover filter contrast-120 brightness-[75%] group-hover:scale-110 group-hover:filter-none transition-all duration-1000 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-black/35 group-hover:opacity-85 transition-opacity duration-700"></div>
+
+                        <div className="relative z-10 flex items-center justify-between">
+                          <span className="text-[9px] uppercase tracking-[0.25em] text-[#cbb074] font-body font-semibold">
+                            HAUTE BRIDAL ATELIER
+                          </span>
+                          <span className="text-[10px] sm:text-xs font-semibold text-[#070706] bg-[#cbb074] px-2.5 py-0.5 rounded-full font-body font-medium shadow-sm">
+                            180 min Sitting
+                          </span>
+                        </div>
+
+                        <div className="relative z-10 flex items-end justify-between gap-2">
+                          <div className="space-y-0.5">
+                            <span className="text-[10px] uppercase tracking-[0.15em] text-[#9c978e] font-body block group-hover:text-white transition-colors">
+                              Full Bridal Styling · HD Makeup
+                            </span>
+                            <h3 className="font-display sm:font-sans font-bold text-base sm:text-lg lg:text-xl text-white tracking-tight group-hover:text-[#cbb074] transition-colors">
+                              Bridal Hair & Makeup
+                            </h3>
+                          </div>
+                          <div className="font-display text-lg sm:text-xl lg:text-2xl text-[#cbb074] font-bold whitespace-nowrap group-hover:scale-105 transition-transform">
+                            ₹12,500
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
                 </div>
 
               </div>
@@ -1228,13 +1499,13 @@
 
                   {/* RIGHT COLUMN: COMBINED STAFF IMAGE */}
                   <div className="lg:col-span-6">
-                    <div className="group relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-[#141412] border border-[#252420] hover:border-[#cbb074]/60 transition-all duration-700 shadow-2xl cursor-pointer" onClick={() => { setBookingConfirmed(false); setBookingOpen(true); }}>
+                    <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-[#141412] border border-[#252420] shadow-2xl cursor-pointer" onClick={() => { setBookingConfirmed(false); setBookingOpen(true); }}>
                       <img
                         src={images.craftsmanshipTeam}
                         alt="The Hair Avenue Artisans Team"
-                        className="w-full h-full object-cover filter grayscale contrast-[110%] brightness-[94%] group-hover:grayscale-0 group-hover:contrast-[108%] group-hover:scale-105 transition-all duration-1000 ease-out"
+                        className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-transparent to-transparent group-hover:opacity-40 transition-opacity duration-700"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#070706] via-transparent to-transparent"></div>
 
                       {/* Corner Badge */}
                       <div className="absolute top-4 left-4 px-3 py-1.5 bg-[#070706]/85 backdrop-blur-md border border-[#252420] text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#cbb074] font-body">
@@ -1291,26 +1562,20 @@
             </section>
 
 
-            {/* SCENE 08: IDENTITY DEVANAGARI MORPH */}
+            {/* SCENE 08: IDENTITY (MARATHI) */}
             <section id="scene-devanagari" className="relative z-10 py-20 sm:py-32 px-4 sm:px-12 lg:px-20 bg-[#0e0e0c] border-t border-[#1f1e1a] text-center">
-              <div ref={devanagariCardRef} className="max-w-4xl mx-auto space-y-8 sm:space-y-10 will-change-transform">
+              <div ref={devanagariCardRef} className="max-w-4xl mx-auto space-y-6 sm:space-y-8 will-change-transform">
                 
                 <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#9c978e] font-body block">Scene 08 · Identity</span>
 
-                {/* Devanagari Companion Morph */}
-                <div className="min-h-[90px] sm:min-h-[120px] flex items-center justify-center">
-                  {devanagariState === 0 ? (
-                    <h3 className="font-devanagari text-2xl sm:text-5xl font-normal text-[#cbb074] leading-tight animate-morph">
-                      तुमची शैली. तुमची ओळख.
-                    </h3>
-                  ) : (
-                    <h3 className="font-display text-2xl sm:text-5xl font-normal text-[#f5f2eb] tracking-tight leading-tight animate-morph">
-                      YOUR STYLE. YOUR IDENTITY.
-                    </h3>
-                  )}
+                {/* Always in Marathi */}
+                <div className="flex items-center justify-center py-2">
+                  <h3 className="font-devanagari text-3xl sm:text-5xl lg:text-6xl font-normal text-[#f5f2eb] hover:text-[#cbb074] transition-colors duration-500 tracking-wide leading-tight">
+                    तुमची शैली. तुमची ओळख.
+                  </h3>
                 </div>
 
-                <blockquote className="font-display text-xl sm:text-4xl text-[#f5f2eb] font-normal italic px-2">
+                <blockquote className="font-display text-lg sm:text-3xl text-[#9c978e] font-normal italic px-2">
                   “Born in Kolhapur. Designed for everywhere.”
                 </blockquote>
 
